@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import './Header.scss'
 import Logo from '../../../assets/icons/Logo.svg'
 import { NAVBAR } from '../../../static'
@@ -10,6 +10,11 @@ import { FaBars } from "react-icons/fa6";
 
 
 const Header = () => {
+    const [open, setOpen] = useState(false)
+
+    const handleBar = () => {
+        setOpen(!open)
+    }
 
     const navbar = NAVBAR?.map((item) => (
         <li key={item.id} className='header__item'>
@@ -28,14 +33,14 @@ const Header = () => {
                         <img src={Logo} alt="img" />
                     </a>
                 </div>
-                <ul className='header__list'>
+                <ul className={open ? 'header__list show-list ' : 'header__list'}>
                     {navbar}
                 </ul>
                 <div className="header__btns">
                     <button className='header__btn'><IoSearch /></button>
                     <button className='header__btn'><FaUser /></button>
                     <button className='header__btn header__shop-btn'><PiShoppingCartSimpleFill /> <span>0</span></button>
-                    <button className='header__btn header__bar-btn'><FaBars /></button>
+                    <button className='header__btn header__bar-btn' onClick={handleBar}><FaBars /></button>
                 </div>
             </div>
         </nav>
